@@ -15,7 +15,6 @@
     --accent2: #e8c870;
     --text: #f0f0f0;
     --muted: #888;
-    --green: #4caf50;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,15 +24,291 @@
     color: var(--text);
     font-family: 'Outfit', sans-serif;
     min-height: 100vh;
-    padding-bottom: 140px;
+    padding-bottom: 100px;
   }
 
   header {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 50%, #0a0a0a 100%);
     border-bottom: 1px solid var(--border);
-    padding: 24px 20px 20px;
+    padding: 30px 20px;
     text-align: center;
     position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    letter-spacing: 0.15em;
+    background: linear-gradient(135deg, #c8a850, #e8c870, #a07830);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+
+  .logo-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    padding: 30px 16px 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--accent), transparent);
+  }
+
+  .products-grid {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .product-card.selected {
+    border-color: var(--accent);
+    background: rgba(200, 168, 80, 0.05);
+    transform: scale(1.02);
+  }
+
+  .prod-info { flex: 1; margin-left: 15px; }
+
+  .prod-name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+
+  .prod-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--accent2);
+  }
+
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface2);
+    padding: 6px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .qty-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 24px;
+  }
+
+  .qty-num {
+    font-weight: 700;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    padding: 20px;
+    z-index: 200;
+  }
+
+  .order-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    padding: 18px;
+    border-radius: 14px;
+    color: #000;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .order-btn:active { transform: scale(0.98); }
+
+  .toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    opacity: 0;
+    transition: 0.4s;
+    z-index: 500;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">HASENBERG</div>
+  <div class="logo-sub">Delivery Premium</div>
+</header>
+
+<div class="section-title">Cardápio</div>
+
+<div class="products-grid">
+  <div class="product-card" data-name="Beck 8g" data-price="50" onclick="tapCard(this)">
+    <span style="font-size: 2rem;">🍁</span>
+    <div class="prod-info">
+      <div class="prod-name">Beck 8g</div>
+      <div class="prod-price">R$50</div>
+    </div>
+    <div class="qty-control" onclick="event.stopPropagation()">
+      <button class="qty-btn" onclick="changeQty(this, -1)">-</button>
+      <span class="qty-num">0</span>
+      <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+    </div>
+  </div>
+
+  <div class="product-card" data-name="Origen 1 Pino" data-price="100" onclick="tapCard(this)">
+    <span style="font-size: 2rem;">⚡</span>
+    <div class="prod-info">
+      <div class="prod-name">Origen 1 Pino</div>
+      <div class="prod-price">R$100</div>
+    </div>
+    <div class="qty-control" onclick="event.stopPropagation()">
+      <button class="qty-btn" onclick="changeQty(this, -1)">-</button>
+      <span class="qty-num">0</span>
+      <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+    </div>
+  </div>
+
+  <div class="product-card" data-name="Balas 1 Un" data-price="100" onclick="tapCard(this)">
+    <span style="font-size: 2rem;">🍬</span>
+    <div class="prod-info">
+      <div class="prod-name">Balas 1 Un</div>
+      <div class="prod-price">R$100</div>
+    </div>
+    <div class="qty-control" onclick="event.stopPropagation()">
+      <button class="qty-btn" onclick="changeQty(this, -1)">-</button>
+      <span class="qty-num">0</span>
+      <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-bar">
+  <button class="order-btn" onclick="handleOrder()">ENVIAR PEDIDO</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const cart = {};
+  // CONFIGURAÇÃO DO DESTINATÁRIO
+  const DESTINATION_PHONE = "556696402293";
+
+  function tapCard(card) {
+    const qtyNum = card.querySelector('.qty-num');
+    if (qtyNum.textContent === '0') {
+      qtyNum.textContent = '1';
+      card.classList.add('selected');
+      updateCart(card);
+    }
+  }
+
+  function changeQty(btn, delta) {
+    const card = btn.closest('.product-card');
+    const qtyNum = card.querySelector('.qty-num');
+    let q = Math.max(0, parseInt(qtyNum.textContent) + delta);
+    qtyNum.textContent = q;
+    card.classList.toggle('selected', q > 0);
+    updateCart(card);
+  }
+
+  function updateCart(card) {
+    const name = card.dataset.name;
+    const price = parseInt(card.dataset.price);
+    const qty = parseInt(card.querySelector('.qty-num').textContent);
+    
+    if (qty > 0) {
+      cart[name] = { price, qty };
+    } else {
+      delete cart[name];
+    }
+  }
+
+  function handleOrder() {
+    const items = Object.keys(cart);
+    
+    if (items.length === 0) {
+      showToast("Selecione pelo menos um item!");
+      return;
+    }
+
+    let total = 0;
+    let msg = "⭐ *NOVO PEDIDO - HASENBERG* ⭐\n\n";
+    
+    items.forEach(name => {
+      const item = cart[name];
+      const sub = item.price * item.qty;
+      total += sub;
+      msg += `▪️ ${name}\n   *Qtd:* ${item.qty} | *Sub:* R$${sub}\n\n`;
+    });
+
+    msg += `━━━━━━━━━━━━━━\n💰 *TOTAL DO PEDIDO: R$${total}*\n━━━━━━━━━━━━━━`;
+    
+    const whatsappUrl = `https://wa.me/${DESTINATION_PHONE}?text=${encodeURIComponent(msg)}`;
+    window.open(whatsappUrl, '_blank');
+  }
+
+  function showToast(m) {
+    const t = document.getElementById('toast');
+    t.textContent = m;
+    t.style.opacity = 1;
+    setTimeout(() => t.style.opacity = 0, 2500);
+  }
+</script>
+
+</body>
+</html>
     top: 0;
     z-index: 100;
   }
