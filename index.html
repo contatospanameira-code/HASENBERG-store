@@ -678,6 +678,225 @@
     </div>
     <button class="whatsapp-btn" onclick="handleOrder()">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Enviar P"cat-btn active" onclick="scrollSec('beck', this)">🍁 Beck</button>
+  <button class="cat-btn" onclick="scrollSec('origen', this)">⚡ Origen</button>
+  <button class="cat-btn" onclick="scrollSec('balas', this)">🍬 Balas</button>
+  <button class="cat-btn" onclick="scrollSec('escama', this)">🐟 Escama</button>
+</div>
+
+<div id="beck">
+  <div class="section-title">🍁 Beck 🍁</div>
+  <div class="products-grid">
+    <div class="product-card" data-name="🍁 Beck 8g" data-price="50" onclick="tapCard(this)">
+      <div class="prod-emoji">🍁</div>
+      <div class="prod-info">
+        <div class="prod-name">Beck 8g</div>
+        <div class="prod-desc">Porção 8 gramas</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$50</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-name="🍁 Beck 16g" data-price="100" onclick="tapCard(this)">
+      <div class="prod-emoji">🍁</div>
+      <div class="prod-info">
+        <div class="prod-name">Beck 16g</div>
+        <div class="prod-desc">Porção 16 gramas</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$100</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-name="🍁 Beck 25g" data-price="150" onclick="tapCard(this)">
+      <div class="prod-emoji">🍁</div>
+      <div class="prod-info">
+        <div class="prod-name">Beck 25g</div>
+        <div class="prod-desc">Porção 25 gramas</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$150</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-name="🍁 Beck 50g" data-price="300" onclick="tapCard(this)">
+      <div class="prod-emoji">🍁</div>
+      <div class="prod-info">
+        <div class="prod-name">Beck 50g</div>
+        <div class="prod-desc">Porção 50 gramas</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$300</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="origen">
+  <div class="section-title">⚡ Origen ⚡</div>
+  <div class="products-grid">
+    <div class="product-card" data-name="⚡ Origen 1 Pino" data-price="100" onclick="tapCard(this)">
+      <div class="prod-emoji">⚡</div>
+      <div class="prod-info">
+        <div class="prod-name">Origen 1 Pino</div>
+        <div class="prod-desc">1 unidade</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$100</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-name="⚡ Origen 2 Pinos" data-price="200" onclick="tapCard(this)">
+      <div class="prod-emoji">⚡</div>
+      <div class="prod-info">
+        <div class="prod-name">Origen 2 Pinos</div>
+        <div class="prod-desc">2 unidades</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$200</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-name="⚡ Origen 5 Pinos" data-price="500" onclick="tapCard(this)">
+      <div class="prod-emoji">⚡</div>
+      <div class="prod-info">
+        <div class="prod-name">Origen 5 Pinos</div>
+        <div class="prod-desc">5 unidades</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$500</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="balas">
+  <div class="section-title">🍬 Balas 🍬</div>
+  <div class="products-grid">
+    <div class="product-card" data-name="🍬 Balas 1 🍍" data-price="100" onclick="tapCard(this)">
+      <div class="prod-emoji">🍍</div>
+      <div class="prod-info">
+        <div class="prod-name">Balas 1 🍍</div>
+        <div class="prod-desc">1 unidade</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$100</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-name="🍬 Balas 2 🍍🍍" data-price="200" onclick="tapCard(this)">
+      <div class="prod-emoji">🍍</div>
+      <div class="prod-info">
+        <div class="prod-name">Balas 2 🍍🍍</div>
+        <div class="prod-desc">2 unidades</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$200</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="escama">
+  <div class="section-title">🐟🔥 Escama 98% 🔥🐟</div>
+  <div class="products-grid">
+    <div class="product-card" data-name="🐟 Escama 0.5G" data-price="75" onclick="tapCard(this)">
+      <div class="prod-emoji">🐟</div>
+      <div class="prod-info">
+        <div class="prod-name">Escama 0.5G</div>
+        <div class="prod-desc">98% pureza — 0.5 grama</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$75</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card" data-name="🐟 Escama 1G" data-price="150" onclick="tapCard(this)">
+      <div class="prod-emoji">🐟</div>
+      <div class="prod-info">
+        <div class="prod-name">Escama 1G</div>
+        <div class="prod-desc">98% pureza — 1 grama</div>
+      </div>
+      <div class="prod-right">
+        <div class="prod-price">R$150</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-bar">
+  <button class="bag-btn" onclick="openCart()">
+    🛍 Sacola <span class="count-pill" id="bottomCount">0</span>
+  </button>
+  <button class="order-btn" onclick="handleOrder()">
+    📲 Pedir Agora →
+  </button>
+</div>
+
+<div class="cart-overlay" id="cartOverlay" onclick="outsideClose(event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <div class="cart-title">🛍 Sua Sacola</div>
+      <button class="close-cart" onclick="closeCart()">✕</button>
+    </div>
+    <div id="cartItems">
+      <div class="cart-empty">Sua sacola está vazia!</div>
+    </div>
+    <div id="cartTotalRow" class="cart-total" style="display:none">
+      <div class="cart-total-label">Total</div>
+      <div class="cart-total-value" id="cartTotalValue">R$0</div>
+    </div>
+    <button class="whatsapp-btn" onclick="handleOrder()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
       Enviar P    position: sticky;
     top: 0;
     z-index: 100;
