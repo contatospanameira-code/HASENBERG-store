@@ -15,6 +15,7 @@
     --accent2: #e8c870;
     --text: #f0f0f0;
     --muted: #888;
+    --green: #4caf50;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,16 +25,387 @@
     color: var(--text);
     font-family: 'Outfit', sans-serif;
     min-height: 100vh;
-    padding-bottom: 100px;
+    padding-bottom: 140px;
   }
 
   header {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 50%, #0a0a0a 100%);
     border-bottom: 1px solid var(--border);
-    padding: 30px 20px;
+    padding: 24px 20px 20px;
     text-align: center;
     position: sticky;
     top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    letter-spacing: 0.18em;
+    background: linear-gradient(135deg, #c8a850, #e8c870, #a07830);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .logo-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .cart-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 1.3rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .categories {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 16px 16px 8px;
+    scrollbar-width: none;
+  }
+  .categories::-webkit-scrollbar { display: none; }
+
+  .cat-btn {
+    flex-shrink: 0;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .cat-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(200,168,80,0.08);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    padding: 20px 16px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--accent), transparent);
+  }
+
+  .products-grid {
+    display: flex;
+    flex-direction: column;
+    padding: 0 12px;
+  }
+
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: border-color 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card.selected {
+    border-color: var(--accent);
+    background: rgba(200,168,80,0.06);
+  }
+
+  .prod-emoji { font-size: 1.6rem; flex-shrink: 0; }
+  .prod-info { flex: 1; }
+  .prod-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+  .prod-desc { font-size: 0.75rem; color: var(--muted); }
+  .prod-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--accent2); }
+
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2px 4px;
+  }
+
+  .qty-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 1.2rem;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+  }
+
+  .qty-num { font-weight: 700; font-size: 0.9rem; min-width: 20px; text-align: center; }
+
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+  }
+  .cart-overlay.open { display: flex; }
+
+  .cart-panel {
+    background: var(--surface);
+    border-top: 2px solid var(--accent);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px 16px 24px;
+  }
+
+  .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .cart-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--accent); }
+  .close-cart { background: var(--surface2); border: 1px solid var(--border); color: #fff; width: 32px; height: 32px; border-radius: 50%; }
+
+  .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .cart-total { display: flex; justify-content: space-between; padding: 14px 0; }
+  .cart-total-value { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--accent); }
+
+  .whatsapp-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    border: none;
+    color: #fff;
+    padding: 16px;
+    border-radius: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(17,17,17,0.97);
+    border-top: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex;
+    gap: 10px;
+    z-index: 150;
+  }
+
+  .bag-btn {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .order-btn {
+    flex: 2;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    color: #000;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    border: 1px solid var(--accent);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 400;
+  }
+  .toast.show { opacity: 1; }
+
+  .count-pill { background: var(--accent); color: #000; border-radius: 10px; padding: 1px 7px; font-size: 0.75rem; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">HASENBERG</div>
+  <div class="logo-sub">Delivery Premium</div>
+  <div class="cart-badge" onclick="openCart()">🛍</div>
+</header>
+
+<div class="categories">
+  <button class="cat-btn active" onclick="scrollSec('beck', this)">🍁 Beck</button>
+  <button class="cat-btn" onclick="scrollSec('origen', this)">⚡ Origen</button>
+  <button class="cat-btn" onclick="scrollSec('balas', this)">🍬 Balas</button>
+  <button class="cat-btn" onclick="scrollSec('escama', this)">🐟 Escama</button>
+</div>
+
+<div id="beck">
+  <div class="section-title">🍁 Beck 🍁</div>
+  <div class="products-grid">
+    <div class="product-card" data-name="🍁 Beck 8g" data-price="50" onclick="tapCard(this)">
+      <div class="prod-emoji">🍁</div>
+      <div class="prod-info"><div class="prod-name">Beck 8g</div><div class="prod-desc">Porção 8 gramas</div></div>
+      <div class="prod-right"><div class="prod-price">R$50</div><div class="qty-control" onclick="event.stopPropagation()"><button class="qty-btn" onclick="changeQty(this, -1)">−</button><span class="qty-num">0</span><button class="qty-btn" onclick="changeQty(this, 1)">+</button></div></div>
+    </div>
+    </div>
+</div>
+
+<div class="bottom-bar">
+  <button class="bag-btn" onclick="openCart()">🛍 Sacola <span class="count-pill" id="bottomCount">0</span></button>
+  <button class="order-btn" onclick="handleOrder()">📲 Pedir Agora →</button>
+</div>
+
+<div class="cart-overlay" id="cartOverlay" onclick="outsideClose(event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <div class="cart-title">🛍 Sua Sacola</div>
+      <button class="close-cart" onclick="closeCart()">✕</button>
+    </div>
+    <div id="cartItems"><div class="cart-empty" style="text-align:center; color:var(--muted); padding:20px;">Sua sacola está vazia!</div></div>
+    <div id="cartTotalRow" class="cart-total" style="display:none">
+      <div style="color:var(--muted); font-weight:600;">TOTAL</div>
+      <div class="cart-total-value" id="cartTotalValue">R$0</div>
+    </div>
+    <button class="whatsapp-btn" onclick="handleOrder()">Enviar Pedido no WhatsApp</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const cart = {};
+  const PHONE_NUMBER = "556696402293"; // NÚMERO FIXO CONFIGURADO
+
+  function tapCard(card) {
+    const qtyNum = card.querySelector('.qty-num');
+    if (qtyNum.textContent === '0') {
+      qtyNum.textContent = '1';
+      card.classList.add('selected');
+      syncCart(card);
+    }
+  }
+
+  function changeQty(btn, delta) {
+    const card = btn.closest('.product-card');
+    const qtyNum = card.querySelector('.qty-num');
+    let qty = Math.max(0, parseInt(qtyNum.textContent) + delta);
+    qtyNum.textContent = qty;
+    card.classList.toggle('selected', qty > 0);
+    syncCart(card);
+  }
+
+  function syncCart(card) {
+    const name = card.dataset.name;
+    const price = parseInt(card.dataset.price);
+    const qty = parseInt(card.querySelector('.qty-num').textContent);
+    if (qty === 0) delete cart[name];
+    else cart[name] = { name, price, qty };
+    renderUI();
+  }
+
+  function renderUI() {
+    const items = Object.values(cart);
+    const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+    const count = items.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('bottomCount').textContent = count;
+    
+    const ci = document.getElementById('cartItems');
+    const tr = document.getElementById('cartTotalRow');
+
+    if (!items.length) {
+      ci.innerHTML = '<div style="text-align:center; color:var(--muted); padding:20px;">Sua sacola está vazia!</div>';
+      tr.style.display = 'none';
+    } else {
+      ci.innerHTML = items.map(i => `
+        <div class="cart-item">
+          <div style="font-size:0.85rem;">${i.name} (x${i.qty})</div>
+          <div style="font-family:'Bebas Neue'; color:var(--accent2);">R$${i.price * i.qty}</div>
+        </div>
+      `).join('');
+      tr.style.display = 'flex';
+      document.getElementById('cartTotalValue').textContent = 'R$' + total;
+    }
+  }
+
+  function handleOrder() {
+    const items = Object.values(cart);
+    if (!items.length) { showToast('⚠️ Adicione itens primeiro!'); return; }
+    
+    const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+    let msg = '🛍 *Pedido HASENBERG*\n\n';
+    items.forEach(i => msg += `• ${i.name} x${i.qty} — R$${i.price * i.qty}\n`);
+    msg += `\n💰 *Total: R$${total}*`;
+    
+    window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  function openCart() { document.getElementById('cartOverlay').classList.add('open'); }
+  function closeCart() { document.getElementById('cartOverlay').classList.remove('open'); }
+  function outsideClose(e) { if (e.target.id === 'cartOverlay') closeCart(); }
+  function scrollSec(id, btn) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+</script>
+</body>
+</html>
     z-index: 100;
   }
 
