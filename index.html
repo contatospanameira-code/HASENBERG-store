@@ -15,7 +15,6 @@
     --accent2: #e8c870;
     --text: #f0f0f0;
     --muted: #888;
-    --green: #4caf50;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -57,31 +56,16 @@
     margin-top: 4px;
   }
 
-  .cart-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: var(--surface2);
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    font-size: 1.3rem;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .cart-badge:hover { transform: scale(1.1); }
-
   .categories {
     display: flex;
     gap: 8px;
     overflow-x: auto;
     padding: 16px 16px 8px;
     scrollbar-width: none;
+    position: sticky;
+    top: 110px;
+    background: var(--bg);
+    z-index: 90;
   }
   .categories::-webkit-scrollbar { display: none; }
 
@@ -96,12 +80,12 @@
     font-size: 0.78rem;
     cursor: pointer;
     transition: all 0.2s;
-    white-space: nowrap;
   }
-  .cat-btn.active, .cat-btn:hover {
+
+  .cat-btn.active {
     border-color: var(--accent);
     color: var(--accent);
-    background: rgba(200,168,80,0.08);
+    background: rgba(200,168,80,0.1);
   }
 
   .section-title {
@@ -114,6 +98,7 @@
     align-items: center;
     gap: 8px;
   }
+
   .section-title::after {
     content: '';
     flex: 1;
@@ -137,42 +122,17 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    transition: border-color 0.2s, transform 0.15s;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    transition: border-color 0.2s;
   }
-
-  .product-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--accent);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .product-card:hover { border-color: rgba(200,168,80,0.4); }
-  .product-card:hover::before { opacity: 0.5; }
 
   .product-card.selected {
     border-color: var(--accent);
     background: rgba(200,168,80,0.06);
   }
-  .product-card.selected::before { opacity: 1; }
-
-  .prod-emoji { font-size: 1.6rem; flex-shrink: 0; }
 
   .prod-info { flex: 1; }
-
-  .prod-name {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--text);
-    margin-bottom: 2px;
-  }
-
+  .prod-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
   .prod-desc { font-size: 0.75rem; color: var(--muted); }
 
   .prod-right {
@@ -186,7 +146,6 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.3rem;
     color: var(--accent2);
-    letter-spacing: 0.05em;
   }
 
   .qty-control {
@@ -203,166 +162,19 @@
     background: none;
     border: none;
     color: var(--accent);
-    font-size: 1.2rem;
-    width: 28px;
-    height: 28px;
+    font-size: 1.3rem;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    transition: background 0.15s;
     font-weight: 700;
-    line-height: 1;
   }
-  .qty-btn:hover { background: rgba(200,168,80,0.15); }
 
   .qty-num {
     font-weight: 700;
     font-size: 0.9rem;
     min-width: 20px;
     text-align: center;
-    color: var(--text);
   }
-
-  /* CART MODAL */
-  .cart-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    z-index: 200;
-    display: none;
-    align-items: flex-end;
-  }
-  .cart-overlay.open { display: flex; }
-
-  .cart-panel {
-    background: var(--surface);
-    border-top: 2px solid var(--accent);
-    border-radius: 20px 20px 0 0;
-    width: 100%;
-    max-height: 80vh;
-    overflow-y: auto;
-    padding: 20px 16px 24px;
-    animation: slideUp 0.3s ease;
-  }
-
-  @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-  }
-
-  .cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 18px;
-  }
-
-  .cart-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-  }
-
-  .close-cart {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    gap: 8px;
-  }
-
-  .cart-item-name {
-    font-size: 0.85rem;
-    font-weight: 500;
-    flex: 1;
-  }
-
-  .cart-item-qty { font-size: 0.75rem; color: var(--muted); }
-
-  .cart-item-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.1rem;
-    color: var(--accent2);
-  }
-
-  .cart-item-remove {
-    background: none;
-    border: none;
-    color: #555;
-    cursor: pointer;
-    font-size: 0.9rem;
-    padding: 2px 6px;
-    border-radius: 4px;
-    transition: color 0.15s;
-  }
-  .cart-item-remove:hover { color: #e05; }
-
-  .cart-empty {
-    text-align: center;
-    color: var(--muted);
-    padding: 30px 0;
-    font-size: 0.9rem;
-  }
-
-  .cart-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 0 0;
-    margin-top: 4px;
-  }
-
-  .cart-total-label {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .cart-total-value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: var(--accent);
-  }
-
-  .whatsapp-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #25D366, #128C7E);
-    border: none;
-    color: #fff;
-    font-family: 'Outfit', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 16px;
-    border-radius: 14px;
-    cursor: pointer;
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: opacity 0.2s;
-  }
-  .whatsapp-btn:hover { opacity: 0.9; }
 
   /* BOTTOM BAR */
   .bottom-bar {
@@ -383,70 +195,50 @@
     background: var(--surface2);
     border: 1px solid var(--accent);
     color: var(--accent);
-    font-family: 'Outfit', sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
     padding: 14px;
     border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: background 0.2s;
   }
-  .bag-btn:hover { background: rgba(200,168,80,0.12); }
 
   .order-btn {
     flex: 2;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
     border: none;
     color: #000;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 800;
-    font-size: 1rem;
     padding: 14px;
     border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: opacity 0.2s, transform 0.15s;
-  }
-  .order-btn:hover { opacity: 0.9; transform: scale(1.01); }
-  .order-btn:active { transform: scale(0.97); }
-
-  .toast {
-    position: fixed;
-    bottom: 140px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: #222;
-    border: 1px solid var(--accent);
-    color: var(--text);
     font-family: 'Outfit', sans-serif;
-    font-weight: 600;
-    font-size: 0.85rem;
-    padding: 10px 20px;
-    border-radius: 30px;
-    opacity: 0;
-    transition: all 0.3s;
-    z-index: 400;
-    white-space: nowrap;
-  }
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    font-weight: 800;
+    cursor: pointer;
   }
 
-  .count-pill {
-    background: var(--accent);
-    color: #000;
-    border-radius: 10px;
-    padding: 1px 7px;
-    font-size: 0.75rem;
-    font-weight: 700;
+  /* MODAL */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+  }
+
+  .cart-panel {
+    background: var(--surface);
+    border-top: 2px solid var(--accent);
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px 16px 24px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
   }
 </style>
 </head>
@@ -455,11 +247,180 @@
 <header>
   <div class="logo">HASENBERG</div>
   <div class="logo-sub">Delivery Premium</div>
-  <div class="cart-badge" onclick="openCart()" title="Ver sacola">🛍</div>
 </header>
 
 <div class="categories">
   <button class="cat-btn active" onclick="scrollSec('beck', this)">🍁 Beck</button>
+  <button class="cat-btn" onclick="scrollSec('origen', this)">⚡ Origen</button>
+  <button class="cat-btn" onclick="scrollSec('balas', this)">🍬 Balas</button>
+  <button class="cat-btn" onclick="scrollSec('escama', this)">🐟 Escama</button>
+</div>
+
+<div id="beck">
+  <div class="section-title">🍁 Beck</div>
+  <div class="products-grid">
+    <div class="product-card" data-name="🍁 Beck 8g" data-price="50" onclick="tapCard(this)">
+      <div class="prod-info"><div class="prod-name">Beck 8g</div><div class="prod-desc">8 gramas</div></div>
+      <div class="prod-right">
+        <div class="prod-price">R$50</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">-</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="origen">
+  <div class="section-title">⚡ Origen</div>
+  <div class="products-grid">
+    <div class="product-card" data-name="⚡ Origen 1 Pino" data-price="100" onclick="tapCard(this)">
+      <div class="prod-info"><div class="prod-name">Origen 1 Pino</div><div class="prod-desc">Unidade</div></div>
+      <div class="prod-right">
+        <div class="prod-price">R$100</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">-</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="balas">
+  <div class="section-title">🍬 Balas</div>
+  <div class="products-grid">
+    <div class="product-card" data-name="🍬 Balas 1 🍍" data-price="100" onclick="tapCard(this)">
+      <div class="prod-info"><div class="prod-name">Balas 1 🍍</div><div class="prod-desc">Unidade</div></div>
+      <div class="prod-right">
+        <div class="prod-price">R$100</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">-</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="escama">
+  <div class="section-title">🐟 Escama</div>
+  <div class="products-grid">
+    <div class="product-card" data-name="🐟 Escama 1G" data-price="150" onclick="tapCard(this)">
+      <div class="prod-info"><div class="prod-name">Escama 1G</div><div class="prod-desc">98% Pureza</div></div>
+      <div class="prod-right">
+        <div class="prod-price">R$150</div>
+        <div class="qty-control" onclick="event.stopPropagation()">
+          <button class="qty-btn" onclick="changeQty(this, -1)">-</button>
+          <span class="qty-num">0</span>
+          <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-bar">
+  <button class="bag-btn" onclick="openCart()">🛍 Sacola (<span id="count">0</span>)</button>
+  <button class="order-btn" onclick="sendOrder()">📲 Pedir Agora</button>
+</div>
+
+<div class="cart-overlay" id="cartOverlay" onclick="if(event.target.id==='cartOverlay') closeCart()">
+  <div class="cart-panel">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+      <h2 style="font-family:'Bebas Neue'; color:var(--accent); letter-spacing:1px;">Sua Sacola</h2>
+      <button onclick="closeCart()" style="background:none; border:none; color:#fff; font-size:1.5rem;">✕</button>
+    </div>
+    <div id="cartItems"></div>
+    <div id="total" style="font-family:'Bebas Neue'; font-size:2rem; color:var(--accent); margin-top:20px; text-align:right;">Total: R$0</div>
+    <button onclick="sendOrder()" style="width:100%; padding:16px; background:#25D366; color:#fff; border:none; border-radius:12px; margin-top:20px; font-weight:700; font-size:1rem; cursor:pointer;">Finalizar no WhatsApp</button>
+  </div>
+</div>
+
+<script>
+  // O carrinho começa vazio toda vez que a página carrega (sem salvar no navegador)
+  let cart = {};
+
+  function update() {
+    let total = 0, count = 0, html = '';
+    Object.values(cart).forEach(i => {
+      total += i.price * i.qty;
+      count += i.qty;
+      html += `<div class="cart-item">
+                <span>${i.name} (x${i.qty})</span>
+                <span style="color:var(--accent2)">R$${i.price*i.qty}</span>
+              </div>`;
+    });
+    document.getElementById('count').innerText = count;
+    document.getElementById('total').innerText = 'Total: R$' + total;
+    document.getElementById('cartItems').innerHTML = html || '<p style="color:#666; text-align:center; padding:20px;">Sua sacola está vazia</p>';
+  }
+
+  function tapCard(card) {
+    const qtyEl = card.querySelector('.qty-num');
+    if (qtyEl.innerText === '0') {
+      qtyEl.innerText = '1';
+      card.classList.add('selected');
+      const name = card.dataset.name;
+      cart[name] = { name, price: parseInt(card.dataset.price), qty: 1 };
+      update();
+    }
+  }
+
+  function changeQty(btn, delta) {
+    const card = btn.closest('.product-card');
+    const qtyEl = card.querySelector('.qty-num');
+    let q = Math.max(0, parseInt(qtyEl.innerText) + delta);
+    qtyEl.innerText = q;
+    
+    const name = card.dataset.name;
+    if (q > 0) {
+      card.classList.add('selected');
+      cart[name] = { name, price: parseInt(card.dataset.price), qty: q };
+    } else {
+      card.classList.remove('selected');
+      delete cart[name];
+    }
+    update();
+  }
+
+  function openCart() { document.getElementById('cartOverlay').style.display = 'flex'; }
+  function closeCart() { document.getElementById('cartOverlay').style.display = 'none'; }
+
+  function sendOrder() {
+    const items = Object.values(cart);
+    if (!items.length) { alert('Escolha seus itens antes de pedir!'); return; }
+    
+    let msg = '🛍 *Pedido HASENBERG*\n\n';
+    items.forEach(i => msg += `• ${i.name} (x${i.qty}) = R$${i.price*i.qty}\n`);
+    const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+    msg += `\n💰 *Total: R$${total}*\n\n✅ Aguardo confirmação!`;
+    
+    // NÚMERO DEFINITIVO INJETADO AQUI:
+    window.open(`https://wa.me/556696402293?text=${encodeURIComponent(msg)}`);
+  }
+
+  function scrollSec(id, btn) {
+    const el = document.getElementById(id);
+    const offset = 160;
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = el.getBoundingClientRect().top;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = elementPosition - offset;
+
+    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
+"cat-btn active" onclick="scrollSec('beck', this)">🍁 Beck</button>
   <button class="cat-btn" onclick="scrollSec('origen', this)">⚡ Origen</button>
   <button class="cat-btn" onclick="scrollSec('balas', this)">🍬 Balas</button>
   <button class="cat-btn" onclick="scrollSec('escama', this)">🐟 Escama</button>
